@@ -5,16 +5,19 @@ $(document).ready(function () {
     var date = moment().format('LLLL');
     var currentDay = $("#currentDay");
 
+    // display date
+    currentDay.text(date);
 
-
+    // display saved values
     textArr.each(function (index) {
-        var calField = JSON.parse(localStorage.getItem("calendar" + 9 + index));
-        console.log($(calField.text));
-        if (calField !== null) {
-            $(this).attr("textarea").text = calField;
-        }
+        var getItem = 9 + index;
+        var storedVal = localStorage.getItem("calendar" + `${getItem}`);
+        console.log($(this).val);
+        if (storedVal !== null) {
+            $(this).val(storedVal);
+        };
     })
-
+    // set field coloration
     textArr.each(function () {
         // console.log(this);
         var hourMark = $(this).data("hour");
@@ -28,25 +31,12 @@ $(document).ready(function () {
         }
     })
 
-    currentDay.text(date);
-
-
-
+    // save to localStorage
     $(".saveBtn").on("click", function () {
         var saveData = $(this).data("save");
         var saveText = $(this).siblings("textarea").val();
         localStorage.setItem("calendar" + saveData, saveText);
     })
-
-    // calendar09 = JSON.parse(localStorage.getItem("calendar09"));
-    // calendar10 = JSON.parse(localStorage.getItem("calendar10"));
-    // calendar11 = JSON.parse(localStorage.getItem("calendar11"));
-    // calendar12 = JSON.parse(localStorage.getItem("calendar12"));
-    // calendar13 = JSON.parse(localStorage.getItem("calendar13"));
-    // calendar14 = JSON.parse(localStorage.getItem("calendar14"));
-    // calendar15 = JSON.parse(localStorage.getItem("calendar15"));
-    // calendar16 = JSON.parse(localStorage.getItem("calendar16"));
-    // calendar17 = JSON.parse(localStorage.getItem("calendar17"));
 
 
 });
